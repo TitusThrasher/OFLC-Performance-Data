@@ -1,0 +1,68 @@
+import pandas as pd
+import numpy as np
+
+# Define the columns to remove
+columns_to_remove = [
+    'EMPLOYER_POC_LAST_NAME', 'EMPLOYER_POC_FIRST_NAME', 'EMPLOYER_POC_MIDDLE_NAME', 
+    'EMPLOYER_POC_JOB_TITLE', 'EMPLOYER_POC_ADDRESS1', 'EMPLOYER_POC_ADDRESS2', 
+    'EMPLOYER_POC_CITY', 'EMPLOYER_POC_STATE', 'EMPLOYER_POC_POSTAL_CODE', 
+    'EMPLOYER_POC_COUNTRY', 'EMPLOYER_POC_PROVINCE', 'EMPLOYER_POC_PHONE', 
+    'EMPLOYER_POC_PHONE_EXT', 'EMPLOYER_POC_EMAIL', 'AGENT_ATTORNEY_LAST_NAME', 
+    'AGENT_ATTORNEY_FIRST_NAME', 'AGENT_ATTORNEY_MIDDLE_NAME', 'AGENT_ATTORNEY_ADDRESS1', 
+    'FIELD NAME DESCRIPTION', 'AGENT_ATTORNEY_ADDRESS2', 'AGENT_ATTORNEY_CITY', 
+    'AGENT_ATTORNEY_STATE', 'AGENT_ATTORNEY_PROVINCE', 'AGENT_ATTORNEY_POSTAL_CODE', 
+    'AGENT_ATTORNEY_COUNTRY', 'AGENT_ATTORNEY_PHONE', 'AGENT_ATTORNEY_PHONE_EXT', 
+    'AGENT_ATTORNEY_EMAIL_ADDRESS', 'STATE_OF_HIGHEST_COURT', 'NAME_OF_HIGHEST_STATE_COURT', 
+    'PW_OTHER_SOURCE', 'PW_OTHER_YEAR', 'PW_SURVEY_PUBLISHER', 'PW_SURVEY_NAME', 
+    'PREPARER_LAST_NAME', 'PREPARER_FIRST_NAME', 'PREPARER_MIDDLE_INITIAL', 
+    'PREPARER_BUSINESS_NAME', 'PREPARER_EMAIL', 'PW_TRACKING_NUMBER', 'APPENDIX_A_ATTACHED', 
+    'PUBLIC_DISCLOSURE', 'AGREE_TO_LC_STATEMENT', 'EMPLOYER_PROVINCE', 'EMPLOYER_PHONE', 
+    'EMPLOYER_PHONE_EXT'
+]
+
+# Define file paths
+input_excel_path = '/Users/Andrew/Desktop/Python/LCA_Disclosure_Data_FY2023_Q3.xlsx'
+output_csv_path = '/Users/Andrew/Desktop/Python/LCA_Disclosure_Data_FY2023_Q3_optimized.csv'
+
+def optimize_dtypes(df):
+    """Optimize data types to reduce memory usage."""
+    for col in df.columns:
+        if df[col].dtype == 'object':
+            if df[col].nunique() / len(df) < 0.5:  # If less than 50% unique values
+                df[col] = df[col].astype('category')
+        elif df[col].dtype == 'float64':
+            df[col] = pd.to_numeric(df[col], downcast='float')
+        elif df[col].dtype == 'int64':
+            df[col] = pd.to_numeric(df[col], downcast='integer')
+    return df
+
+def process_excel_to_reduced_csv(input_excel, output_csv, columns_to_remove):
+    try:
+        print(f"Processing Excel file and creating optimized CSV: {input_excel} -> {output_csv}")
+        
+        # Read the Excel file
+        df = pd.read_excel(input_excel)
+        print(f"Original shape: {df.shape}")
+        print(f"Original memory usage: {df.memory_usage().sum() / 1024**2:.2f} MB")
+        
+        # Remove specified columns
+        missing_columns = [col for col in columns_to_remove if col not in df.columns]
+        if missing_columns:
+            print(f"Warning: The following columns were not found and will not be removed: {missing_columns}")
+        
+        df = df.drop(columns=columns_to_remove, errors='ignore')
+        
+        # Apply optimization technique
+        df = optimize_dtypes(df)
+        
+        print(f"Optimized shape: {df.shape}")
+        print(f"Optimized memory usage: {df.memory_usage().sum() / 1024**2:.2f} MB")
+        
+        # Write to CSV
+        df.to_csv(output_csv, index=False)
+        print(f"Optimized dataset has been saved to {output_csv}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+# Process the Excel file
+process_excel_to_reduced_csv(input_excel_path, output_csv_path, columns_to_remove)
