@@ -12,24 +12,30 @@ Python script for reducing file size of public Performance Data from the U.S. De
      
 OFLC PERFORMANCE DATA SOURCE: https://www.dol.gov/agencies/eta/foreign-labor/performance
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Features
+
+	•	Column Removal: Unnecessary columns are removed from the dataset.
+	•	Data Type Optimization: Data types are adjusted to reduce memory usage. The script includes a function optimize_dtypes(df) that optimizes the data types in the DataFrame:
+	  •	Converts object types to categorical if they have less than 50% unique values.
+	  •	Downcasts float64 to float32 and int64 to int32 to save memory.
+	•	Memory Usage Reporting: The script reports memory usage before and after optimization.
+	•	Error Handling: The script includes error handling and logs warnings for any issues encountered during processing.
 
 ### Built With
+Python 3.x
 https://github.com/pandas-dev/pandas
+https://github.com/numpy/numpy
 
-[https://github.com
-](https://github.com/numpy/numpy)
-
-<!-- GETTING STARTED -->
 ## Getting Started
-To get a local copy up and running, 
+1.	Define File Paths: Set the 'input_excel_path' and 'output_csv_path' variables to the appropriate local file paths.
+2.	Run the Script: Execute the script via terminal. The script will process the Excel file, remove unnecessary columns, optimize data types, and save the resulting dataset as a CSV fie.
+
+## Additional Notes
+	•	Error Handling: The script logs warnings for missing columns and handles errors gracefully.
+	•	Memory Usage: The script provides memory usage statistics before and after optimization, helping you monitor the efficiency of the optimizations applied.
+	•	Customization: You can modify the list of columns to remove or adjust the data type optimization criteria based on your specific dataset needs.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-
 
 
 
