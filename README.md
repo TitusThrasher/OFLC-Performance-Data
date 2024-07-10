@@ -14,12 +14,12 @@ OFLC PERFORMANCE DATA SOURCE: https://www.dol.gov/agencies/eta/foreign-labor/per
 
 ## Features
 
-	•	Column Removal: Unnecessary columns are removed from the dataset.
-	•	Data Type Optimization: Data types are adjusted to reduce memory usage. The script includes a function optimize_dtypes(df) that optimizes the data types in the DataFrame:
-	  •	Converts object types to categorical if they have less than 50% unique values.
-	  •	Downcasts float64 to float32 and int64 to int32 to save memory.
-	•	Memory Usage Reporting: The script reports memory usage before and after optimization.
-	•	Error Handling: The script includes error handling and logs warnings for any issues encountered during processing.
+	• Column Removal: Unnecessary columns are removed from the dataset.
+	• Data Type Optimization: Data types are adjusted to reduce memory usage. The script includes a function optimize_dtypes(df) that optimizes the data types in the DataFrame:
+	  • Converts object types to categorical if they have less than 50% unique values.
+	  • Downcasts float64 to float32 and int64 to int32 to save memory.
+	• Memory Usage Reporting: The script reports memory usage before and after optimization.
+	• Error Handling: The script includes error handling and logs warnings for any issues encountered during processing.
 
 ### Built With
 Python 3.x
@@ -43,7 +43,6 @@ https://github.com/numpy/numpy
 <!-- CONTRIBUTING -->
 ## Contributing
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
