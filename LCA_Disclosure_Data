@@ -9,7 +9,7 @@ columns_to_remove = [
     'EMPLOYER_POC_COUNTRY', 'EMPLOYER_POC_PROVINCE', 'EMPLOYER_POC_PHONE', 
     'EMPLOYER_POC_PHONE_EXT', 'EMPLOYER_POC_EMAIL', 'AGENT_ATTORNEY_LAST_NAME', 
     'AGENT_ATTORNEY_FIRST_NAME', 'AGENT_ATTORNEY_MIDDLE_NAME', 'AGENT_ATTORNEY_ADDRESS1', 
-    'FIELD NAME DESCRIPTION', 'AGENT_ATTORNEY_ADDRESS2', 'AGENT_ATTORNEY_CITY', 
+    'FIELD_NAME_DESCRIPTION', 'AGENT_ATTORNEY_ADDRESS2', 'AGENT_ATTORNEY_CITY', 
     'AGENT_ATTORNEY_STATE', 'AGENT_ATTORNEY_PROVINCE', 'AGENT_ATTORNEY_POSTAL_CODE', 
     'AGENT_ATTORNEY_COUNTRY', 'AGENT_ATTORNEY_PHONE', 'AGENT_ATTORNEY_PHONE_EXT', 
     'AGENT_ATTORNEY_EMAIL_ADDRESS', 'STATE_OF_HIGHEST_COURT', 'NAME_OF_HIGHEST_STATE_COURT', 
@@ -21,8 +21,8 @@ columns_to_remove = [
 ]
 
 # Define file paths
-input_excel_path = '/Users/Andrew/Desktop/Python/LCA_Disclosure_Data_FY2023_Q3.xlsx'
-output_csv_path = '/Users/Andrew/Desktop/Python/LCA_Disclosure_Data_FY2023_Q3_optimized.csv'
+input_excel_path = '[INPUT_EXCEL_PATH]'
+output_csv_path = '[OUTPUT_CSV_PATH]'
 
 def optimize_dtypes(df):
     """Optimize data types to reduce memory usage."""
